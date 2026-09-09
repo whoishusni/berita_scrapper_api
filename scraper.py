@@ -123,60 +123,67 @@ def scrape_kompas(limit: int = 6) -> List[Dict[str, Any]]:
 
 def scrape_detik(limit: int = 6) -> List[Dict[str, Any]]:
     """Scrape berita paling populer dari Detik.com."""
-    url = "https://www.detik.com/terpopuler"
-    logger.info(f"Mengambil berita dari Detik: {url}")
     items: List[Dict[str, Any]] = []
 
-    try:
-        response = fetch_response(url)
-        soup = BeautifulSoup(response.text, "html.parser")
+    urls = [
+        "https://www.detik.com/terpopuler",
+        "https://news.detik.com/",
+    ]
 
-        articles = soup.select("article.list-content__item")
-        if not articles:
-            articles = soup.select(".media__title")
+    for url in urls:
+        try:
+            logger.info(f"Mengambil berita dari Detik: {url}")
+            response = fetch_response(url)
+            soup = BeautifulSoup(response.text, "html.parser")
 
-        for art in articles:
-            link_tag = art.select_one(".media__title a") or art.select_one("a.media__link") or art.select_one("a")
-            if not link_tag:
-                continue
+            articles = soup.select("article.list-content__item")
+            if not articles:
+                articles = soup.select(".media__title")
 
-            article_url = link_tag.get("href", "").strip()
-            title = clean_text(link_tag.get_text())
+            for art in articles:
+                link_tag = art.select_one(".media__title a") or art.select_one("a.media__link") or art.select_one("a")
+                if not link_tag:
+                    continue
 
-            if not article_url or not title:
-                continue
+                article_url = link_tag.get("href", "").strip()
+                title = clean_text(link_tag.get_text())
 
-            # Gambar
-            img_tag = art.select_one(".media__image img") or art.select_one("img")
-            img_url = None
-            if img_tag:
-                img_url = img_tag.get("src") or img_tag.get("data-src")
+                if not article_url or not title:
+                    continue
 
-            # Tanggal / Kanal
-            date_tag = art.select_one(".media__date")
-            published_at = None
-            category = "Detik"
-            if date_tag:
-                span_date = date_tag.select_one("span")
-                if span_date and span_date.get("title"):
-                    published_at = span_date["title"].strip()
-                else:
-                    published_at = clean_text(date_tag.get_text())
+                # Gambar
+                img_tag = art.select_one(".media__image img") or art.select_one("img")
+                img_url = None
+                if img_tag:
+                    img_url = img_tag.get("src") or img_tag.get("data-src")
 
-                # Jika teks mengandung pipe '|' misalnya "detikNews | 3 jam yang lalu"
-                full_text = clean_text(date_tag.get_text()) or ""
-                if "|" in full_text:
-                    parts = [p.strip() for p in full_text.split("|")]
-                    category = parts[0]
-                    if not published_at or published_at == full_text:
-                        published_at = parts[1]
+                # Tanggal / Kanal
+                date_tag = art.select_one(".media__date")
+                published_at = None
+                category = "Detik"
+                if date_tag:
+                    span_date = date_tag.select_one("span")
+                    if span_date and span_date.get("title"):
+                        published_at = span_date["title"].strip()
+                    else:
+                        published_at = clean_text(date_tag.get_text())
 
-            article = build_article("detik", title, article_url, img_url, category, published_at)
-            if append_article(items, article, limit):
+                    # Jika teks mengandung pipe, misalnya "detikNews | 3 jam yang lalu"
+                    full_text = clean_text(date_tag.get_text()) or ""
+                    if "|" in full_text:
+                        parts = [p.strip() for p in full_text.split("|")]
+                        category = parts[0]
+                        if not published_at or published_at == full_text:
+                            published_at = parts[1]
+
+                article = build_article("detik", title, article_url, img_url, category, published_at)
+                if append_article(items, article, limit):
+                    break
+
+            if items:
                 break
-
-    except Exception as e:
-        logger.error(f"Gagal scrape Detik: {e}")
+        except Exception as e:
+            logger.warning(f"Gagal mengambil Detik dari {url}: {e}")
 
     logger.info(f"Detik: Berhasil mendapatkan {len(items)} berita.")
     return items
@@ -429,7 +436,11 @@ Contoh penggunaan:
     payload = scrape_all(limit_per_source=args.limit, sources=selected_sources)
     saved_path = save_to_json(payload, args.output)
 
-    excel_path = save_to_excel(payload, args.excel_output or build_excel_filename())
+    excel_path = None
+    try:
+        excel_path = save_to_excel(payload, args.excel_output or build_excel_filename())
+    except RuntimeError as exc:
+        logger.warning(f"Ekspor Excel dilewati: {exc}")
 
     print("\n" + "=" * 60)
     print(f"[OK] Scraping selesai! Total berita terkumpul: {payload['total_items']}")
