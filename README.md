@@ -1,4 +1,4 @@
-# Indonesian Hot News Scraper & FastAPI
+# berita_scrapper_api (Scrapper dan API)
 
 Aplikasi Python CLI untuk scraping berita hot / terpopuler dari 4 portal berita Indonesia:
 - **Kompas.com** (`https://indeks.kompas.com/terpopuler`)
@@ -6,7 +6,7 @@ Aplikasi Python CLI untuk scraping berita hot / terpopuler dari 4 portal berita 
 - **Kumparan.com** (`https://kumparan.com/trending`)
 - **Narasi.tv** (`https://gateway.narasi.tv/core/api/articles/navbar/news`)
 
-Dilengkapi dengan server **FastAPI** untuk menyajikan data berita dari file JSON sebagai REST API publik (CORS enabled).
+Dilengkapi dengan server **FastAPI** untuk menyajikan data berita dari file JSON sebagai REST API publik
 
 
 ## 1. Instalasi Dependensi
@@ -92,4 +92,4 @@ Dokumentasi interaktif (Swagger UI): **http://localhost:8000/docs**
   ```http
   GET http://localhost:8000/api/news?search=krakatau
   ```
-# berita_scrapper_api
+
