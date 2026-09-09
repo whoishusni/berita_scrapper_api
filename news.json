@@ -1,0 +1,55 @@
+{
+  "status": "success",
+  "updated_at": "2026-09-09T06:01:59.574182+00:00",
+  "total_items": 4,
+  "sources": [
+    "kompas",
+    "detik",
+    "kumparan",
+    "narasi"
+  ],
+  "summary": {
+    "kompas": 1,
+    "detik": 1,
+    "kumparan": 1,
+    "narasi": 1
+  },
+  "data": [
+    {
+      "source": "kompas",
+      "title": "Cara Cek Desil Bansos 2026 Lewat HP, Cukup Masukkan NIK KTP",
+      "url": "https://money.kompas.com/read/2026/09/09/093116526/cara-cek-desil-bansos-2026-lewat-hp-cukup-masukkan-nik-ktp",
+      "image": "https://asset.kompas.com/crops/r6hT6Upxigr7YNdYr-uLE021dmg=/157x0:1160x669/230x153/data/photo/2026/08/04/6a713d94f417b.jpeg",
+      "category": "Money",
+      "published_at": "9 September 2026",
+      "scraped_at": "2026-09-09T06:01:57.097341+00:00"
+    },
+    {
+      "source": "detik",
+      "title": "Polresta Soetta Bantu Pulangkan 7 Mahasiswi Korban Penipuan Tiket di TikTok",
+      "url": "https://news.detik.com/berita/d-8654928/polresta-soetta-bantu-pulangkan-7-mahasiswi-korban-penipuan-tiket-di-tiktok",
+      "image": "https://akcdn.detik.net.id/community/media/visual/2026/09/09/satreskrim-polresta-bandara-soekarno-hatta-membantu-membelikan-tiket-bus-pulang-bagi-7-mahasiswi-korban-penipuan-1788924309448_43.jpeg?w=220&q=90",
+      "category": "detikNews",
+      "published_at": "Rabu, 09 Sep 2026 10:26 WIB",
+      "scraped_at": "2026-09-09T06:01:57.871898+00:00"
+    },
+    {
+      "source": "kumparan",
+      "title": "2 Pembunuh Kakak-Beradik di Banyuasin Terancam Hukuman Mati",
+      "url": "https://kumparan.com/2-pembunuh-kakak-beradik-di-banyuasin-terancam-hukuman-mati-289IOrXPFWb",
+      "image": "https://blue.kumparan.com/image/upload/v1634025439/01m203dqyaek30jtzxwrncygy2.jpg",
+      "category": "News",
+      "published_at": "2026-09-09T03:44:51.782384Z",
+      "scraped_at": "2026-09-09T06:01:58.890086+00:00"
+    },
+    {
+      "source": "narasi",
+      "title": "Setelah Karhutla, Ke Mana Orang Utan Pulang?",
+      "url": "https://narasi.tv/read/setelah-karhutla-ke-mana-orang-utan-pulang",
+      "image": "https://cdn.narasi.tv/files/2026/09/06/image/86818-1788707556.png",
+      "category": "Environment",
+      "published_at": "2026-09-09T06:00:00.000Z",
+      "scraped_at": "2026-09-09T06:01:59.573187+00:00"
+    }
+  ]
+}
