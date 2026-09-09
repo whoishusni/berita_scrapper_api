@@ -1,4 +1,4 @@
-# berita_scrapper_api (Scrapper dan API)
+# berita_scrapper_api (Scrapper Web dan API Provider)
 
 Aplikasi Python CLI untuk scraping berita hot / terpopuler dari 4 portal berita Indonesia:
 - **Kompas.com** (`https://indeks.kompas.com/terpopuler`)
